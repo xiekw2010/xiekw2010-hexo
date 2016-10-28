@@ -1,0 +1,75 @@
+---
+layout: post
+keywords: blog
+description: blog
+title: "快速枚举"
+categories: [Archive]
+tags: [Archive]
+group: archive
+icon: file-alt
+date: 2014-07-22 17:53:30
+---
+
+刚在[Mikeash](https://www.mikeash.com/pyblog/)的博客上发现了苹果实现快速枚举的思路，[详情](https://www.mikeash.com/pyblog/friday-qa-2010-04-16-implementing-fast-enumeration.html)。
+
+虽然没太看懂是什么意思，但大概思路是把集合一块块取出（而不是一个个取出），在每一块中再进行枚举。快速枚举协议(NSFastEnumeration)
+
+	- (NSUInteger)countByEnumeratingWithState:	(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len;
+
+
+有个struct
+
+	 typedef struct {
+        unsigned long state;
+        id *itemsPtr;
+        unsigned long *mutationsPtr;
+        unsigned long extra[5];
+    }
+
+介绍下这个struct.
+
++ state 描述当前collection循环的状态，可能是continue,可能是break
++ itemPtr 当前取出块(bulk)collection对象pointer的c array.
++ mutationPtr 快速枚举有个功能就是能检测出枚举的时候乱改collection的值，这是不允许的，但它能给出警告。
++ extra[5] i dont have a idea.
+
+所以说，Objc 的
+
+	for(id obj in collection)
+    {
+        // body
+    }
+
+如何实现呢？
+
+见下，
+
+	 // declare all the local state needed
+    NSFastEnumerationState state = { 0 };
+    id stackbuf[16];
+    BOOL firstLoop = YES;
+    long mutationsPtrValue;
+
+    // outer loop
+    NSUInteger count;
+    while((count = [collection countByEnumeratingWithState: &state objects: stackbuf count: 16]))
+    {
+        // check for mutation, but only after the first loop
+        // (note that I'm not sure whether the real compiler puts this
+        // in the inner loop or outer loop, and it could conceivably
+        // change from one compiler version to the next)
+        if(!firstLoop && mutationsPtrValue != *state.mutationsPtr)
+            @throw ..mutation exception...
+        firstLoop = NO;
+        mutationsPtrValue = *state.mutationsPtr;
+
+        // inner loop over the array returned by the NSFastEnumeration call
+        id obj;
+        for(NSUInteger index = 0; index < count; index++)
+        {
+            obj = state.itemsPtr[index];
+            // body
+        }
+    }
+
+ 可以看懂的是，这里面的双重循环。从collection里一块块取，再在块里面一个个枚举。

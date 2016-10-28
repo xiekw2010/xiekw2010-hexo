@@ -1,0 +1,38 @@
+---
+title: test
+date: 2012-12-03 21:36
+---
+
+
+h1. My Test
+
+My test includes as below:
+* gongchao
+** diaoB
+*** diaoQQ
+*** playWeixin
+** SB
+*** PlayDota
+*** PlayWow
+* Xiekw
+** BasketBall
+*** playBase
+*** modudu
+
+
+h2. Here is the Picture
+
+The T-MAC:
+
+!http://fmn.rrimg.com/fmn060/20121203/2025/p/m2w400h400q85lt_large_wz5t_769a000078961260.jpg!
+
+And with the link:
+
+!http://fmn.rrimg.com/fmn060/20121203/2025/p/m2w400h400q85lt_large_wz5t_769a000078961260.jpg!:http://www.renren.com
+
+
+The Photo in MY MAC:
+!/images/pangzi.JPG!
+
+
+bq. this is blackquote

@@ -1,0 +1,56 @@
+---
+title: "iOS反向工程Steps"
+date: 2014-3-26 17:53:30
+---
+
+由于工作需要我hook一个人家app的加密的key出来，所以这几天接触了下iOS反向工程，感觉还不错。（感觉巨人的肩膀还不错）
+
+虽然最终有把key搞出来，但是一些对key的加密操作还在研究中。
+
+写篇文档总结下吧, 包括了说明需要哪些工具，这些工具又如何安装，如何使用。有兴趣可以看看。[下载地址](http://pan.baidu.com/s/1eQik9jG)
+
+
+这里先把目录列出来做预览：
+
+
+### How to install Tools on mac
+
+0. In your terminal, cd to this directroy
+
+1. 'cp class-dump /usr/local/bin' (install class-dump)
+
+2. 'sudo cp -r theos /opt/theos' (install theos, include the ldid and lib, just copy is ok)
+
+3. double-click MacPorts-2.2.1-10.9-Mavericks.pkg, after installed, 'sudo port selfupdate' then 'sudo port install dpkg' (install dkpg)
+
+4. optional to install IDA, the idademo65_mac.tgz or Hopper Disassembler 2.7.7_2.zip (analysis tools)
+
+
+### How to install Tools on jailbreak iOS
+
+0. ssh, cydia (password:alpine)
+
+1. AppSync, source : "apt.91.com" (for iOS to install .ipa)
+
+2. clutch, source : "apt.app111.com" (for decrypting the appstore app)
+
+3. syslogd, source : ""apt.saurik.com"" (for checking the nslog in theos project)
+
+4. GDB, source : "cydia.radare.org"
+
+5. Cycript, source : "apt.saurik.com"
+
+
+### Maybe some useful commands
+
+1. '/opt/theos/bin/nic.pl' (create the theo project)
+
+2. 'make package install' (package the theos project and ssh install it to iOS device)
+
+3. 'ssh root@10.10.0.146' (login to iOS system)
+
+4. 'grep XIEKW /var/log/syslog' (check the NSLog, XIEKW is my keywords wrote in the NSLog, just for search filtering purpose)
+
+5. 'clutch "Get Likes"' (after you ssh in iOS, this will decrypt the app)
+
+6. the sample project(after decrypted) "Get Likes" and "Instagram" is optional for your testing on class-dump (The command is 'class-dump -H Instagram -o ~/Desktop/InstagramHeaders')

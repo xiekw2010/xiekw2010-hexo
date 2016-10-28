@@ -1,0 +1,50 @@
+---
+layout: post
+keywords: blog
+description: blog
+title: "pch文件log定义"
+categories: [iOS]
+tags: [Archive]
+group: archive
+icon: file-alt
+date: 2014-05-20 17:53:30
+---
+
+把这段copy到项目.pch文件中。
+
+	#define __NO_LOG__
+	#ifdef __NO_LOG__
+	#define MYLog(format, ...)
+	#else
+	#define MYLog(format, ...) NSLog(format, ## __VA_ARGS__)
+	#endif
+
+	#define NSLog(format, ...) do {                                                                          \
+	fprintf(stderr, "<%s : %d> %s\n",                                           \
+	[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],  \
+	__LINE__, __func__);                                                        \
+	(NSLog)((format), ##__VA_ARGS__);                                           \
+	fprintf(stderr, "-------\n");                                               \
+	} while (0)
+
+
+###使用
+
+1. 可以用MYLOG代替NSLog，这样可以一次性打开与关闭所有NSLog。注释 #define __NO_LOG__ 就是打开，不注释就是关闭。
+
+2. 写NSLog的时候，有时候为了区别方法，需要这么写NSLog(@"AppDidFinishLuanching...array is %@", someArray)。而这个NSLog版本，你只要写NSLog(@"array is %@", someArray). 这里还会打印出文件位置，在代码中的行数，方法名。
+
+
+感谢Onevcat的这篇[blog](http://onevcat.com/2014/01/black-magic-in-macro/)。
+
+
+
+来聊聊炉石，
+
+上赛季用随从贼打到2级，之后就一直两级0星和5星间徘徊。上得了传说可真是实力说话。
+
+这个赛季陪买40包，运气不错，女王，塞纳留斯，自己又硬和了一个血蹄。果断咆哮德走起，最近一直在4级里徘徊。难道我还要一个黑骑士？
+
+怎么说呢？我觉得自己整体上，心态算差的。很容易因为自己烂牌但对手神抽而想摔屏幕。这点不改，估计很难上传说吧。理性的分析，每盘炉石都是一个sandbox，每盘间互不影响，如果操作者的心态被弄坏了，很容易各种崩。做好判断，发挥自己的优势，了解对手的弱势，下回合对手怎么出，对最差结果的预估，适当的放手一搏。
+
+这些说谁都会说。但是我敢肯定高手的心态都很好。至少都能做到，要赢不show操作，要输果断认输。

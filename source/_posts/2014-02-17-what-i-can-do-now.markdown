@@ -1,0 +1,26 @@
+---
+layout: post
+title: What I can do now
+date: 2014-02-17 17:53:30
+---
+
+InstaLocation:
+
+1. 用AVFoundation写了一个相机。
+
+	+ 相机实现: 有一个AVCaptureSession。 这个session主要描述AVCaptureInput与AVCaptureOutput的交互。 AVCaptureInput告诉这个session什么是输入源设备，比如相机。AVCaptureOutput告诉session将输出什么，比如静态图片。
+	然后用这个session来建立一个相机的预览图层，叫AVCaptureVideoPreviewLayer。拍照图片如何生成？用captureOutput来监听"capturingStillImage"这个keypath的value，当需要previewLayer生成图片的时候，在input与output间创建一个AVCaptureConnection的connection，然后用output的实例方法结合connnection来生成相应的media。
+
+2. 支持在图片上的各种位置加文字，图片。
+
+3. 用GPUImageFilter来给照片加滤镜效果。
+
+4. 商业模式的结合，有些文字模板需要加分享锁（分享出去后才能使用），IAP锁（购买后才能使用）。
+
+InstaFollow, InstaLikes, TwitterBoost:
+
+1. 网络操作，自己模仿AFNetworking，用NSoperation结合NSURLConnection，写了一个用Block来callback的NetworkOperation.然后在一个APISharedManager(单例)里面用OperationQueue来控制这些Operation的操作。
+
+2. 数据库操作，MagicalRecord来做框架。表里面加一个sessionNumber来比较同一张表中各批sessionNumber数据之间的关系，也可以rollback（删除当前sessionNumber的数据，把sessionNumber重新指回上一个sessionNumber）。
+
+3. Instalikes里面用到了SDWebImageDownloadOperation来实现一个批量下载图片的Downloader。主要思路，把每个URL对应的Operation存到这个downloader的dictionary里。因为NSOperationQueue会管理operation的执行，所以每次有新的URL进来只要生成SDWebImageDownloadOperation加到queue里面，当用户需要取的时候，根据他提供的URL返回给他该URL对应的SDWebImageDownloadOperation的progressBlock和compeletionBlock。下载好的图片都存到SDImageCache里面来管理。

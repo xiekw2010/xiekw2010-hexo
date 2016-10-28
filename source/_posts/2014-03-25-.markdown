@@ -1,0 +1,29 @@
+---
+title: "考验"
+date: 2014-3-25 17:53:30
+---
+
+昨天boss开会说，我们最好快点学一下Get likes的做法吧。不然快死了。
+
+Get likes的做法就是仿生native instagram，用instagram客服端用的那套API。如果你看过中国家庭伦理剧，那你应该就能明白亲生的与野生的所接收到的待遇的区别。我们现在是野生的，而get likes成功伪装成了亲生的。
+
+碰到的主要问题就是本地搞出一个加密串来装自己是亲生的。
+
+	52422e1f594f2df8a3ac6c401eec3a55abeaf3525a6b7dbffebe73f0b88ae9b3.{"media_id":"683587832343066447_332541436","_csrftoken":"7c3e0ba5a77ee68e73453c04334f0de3"}
+
+关于如何把 *{"media_id":"683587832343066447_332541436","_csrftoken":"7c3e0ba5a77ee68e73453c04334f0de3"}* 搞成 *52422e1f594f2df8a3ac6c401eec3a55abeaf3525a6b7dbffebe73f0b88ae9b3* ，我们Android同事已经反向工程Android instagram。得到一个加密方法和加密key，这些我在Objc里也都已经翻译好了。可是！ 可是，这TM加密的key，iOS版貌似与Android版不一样。
+
+束手无策中...
+
+每天被公司的网络折磨得想哭。150台设备争抢三个网络的带宽。
+
+刚刚开会讨论，到最后应该要去反向工程iOS instagram客户端来log出那个key。
+
+买了本书《iOS应用逆向工程》，今年的新书，希望能对现在有所帮助吧。
+
+现在在看[cycript](http://www.cycript.org/manual/)，貌似就是用这个东西去hook iOS设备运行程序的代码的。今天晚上搞定吧，不过公司的网络实在太paining了，homework咯。
+
+### 参考链接
+
++ [Reverse engineering IOS applications in a fun way](https://www.netspi.com/blog/entryid/210/reverse-engineering-ios-applications-in-a-fun-way)
++ [iphoneDevWiki](http://iphonedevwiki.net/index.php/Cycript)

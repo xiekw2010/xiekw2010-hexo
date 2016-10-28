@@ -1,0 +1,69 @@
+---
+layout: post
+keywords: blog
+description: blog
+title: "Orgmode这么好！"
+categories: [Archive]
+tags: [Archive]
+group: archive
+icon: file-alt
+date: 2015-08-27 17:53:30
+---
+
+这段时间, 看同事们Emacs show的飞起, 果断加入。
+
+这篇主要讲讲目前使用到的一些实用的工具以及心得。
+
+#####安装
+
+1. emacs 官方dmg下载安装
+2. `brew update emacs` 不然不能从终端启动
+3. 在终端 `cd ~` 然后 `git clone https://github.com/xiekw2010/.emacs.d` 就会在你的根目录下下载emacs配置文件
+4. 打开emacs, 第一次启动有点慢, 在装插件
+
+#####Org-mode
+
+平时喜欢做一些todo事情的list, 之前用的系统的`备忘录`, 每天建立一条, 开开心心的。
+
+直到用了org-mode后, 才觉得`备忘录`毕竟还只是备忘录, 作为日常TODO事项管理来说还是too simple了。
+
+申明: C -> `control`, M -> `command`, S -> `shift`
+
+下面列举一些有用的功能:
+
+1. 折叠 -- 初学者接触的第一个命令 `S-TAB` & `TAB`, 当有一万个目标的时候, 就会爱上这个功能
+2. TODO, DONE, SOMEDAY, CANCELED -- 既然任务日志管理, 这些内建标记是必须得 `C-c t`
+3. 任务进度 -- 根据之前的TODO, DONE 在事件的后面加上 `[/]`
+4. 稀疏树 -- 可以一下过滤出某一种关键字的类目 `C-c /`
+5. easy插入链接 -- 可以链接到其他org文件的某些类目某些行, 比如今天的目标里链接到前天的目标 `C-c C-l` then `file:15-8-18.org::Emacs`
+6. UML -- PLANTUML, 使用一些逻辑语言就能自动得到UML图, 官网有详细的教程
+
+#####文件目录管理
+
+######优势
+1. 比起终端来说, 目录展示一目了然
+2. 标记文件, 支持正则标记文件, 标记完后可以做删除, 复制, 移动
+3. 可以shell命令
+
+######快捷键
+1. C-x d 开始dired
+2. j 跳到某个文件上去
+3. %-m 正则标记文件
+4. u 取消标记 U 取消所有标记
+5. C 复制文件 R 剪切文件 D 删除文件
+
+#####其他快捷键
+
+######通用
+- 取消 `C-g`
+- 搜索命令 `M-x`
+- 最近文件浏览历史 `M-S-a`
+- 打开/关闭 顶部的tab `M-x tab`
+
+######窗口
+- 关闭窗口 `C-x 0`
+- 切换窗口光标 `C-x o`
+- 关闭除了第一个外的其他窗口 `C-x 1`
+
+
+####未完待续...

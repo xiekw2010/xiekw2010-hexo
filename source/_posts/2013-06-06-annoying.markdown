@@ -1,0 +1,40 @@
+---
+title: Annoying
+date: 2013-06-06 17:53:30
+tags:
+---
+
+So fucking annoying..
+
+GUI给了我一个无法没有后缀名的字体，这个字体是无法被系统加载出来的，尝试了一万种方法。
+
+现在公司网断了，我还要查一查谷歌，正好在关键点上。nobody knows what fuck is it！
+
+最近有点暴躁，绿灯亮时真恨不得自己是开了辆坦克，把路上的傻逼慢车全碾压掉。
+
+还是做点手头上能做的事情吧，哎~~~
+
+上海人多啊，谁都很着急啊，谁都想开坦克啊。所以我想念在青岛的日子了。
+
+No rush makes a real man.
+
+好苦啊，现在终于把GUI的需求字体给搞定了，我直接网上下了个带有ttf的该种类，以及该种类的粗体。
+
+这个搞笑的字体名字叫做Century Gothic.
+
+下面的代码是检查iOS的font family以及它们的各自成员:
+
+```js
+NSArray *names = [UIFont familyNames];
+NSArray *fontFaces;
+NSLog(@"Font FamilyNames");
+
+for (NSString *name in names) {
+    NSLog(@"Font Family:  %@", name);
+    fontFaces = [UIFont fontNamesForFamilyName:name];
+    for (NSString *fname in fontFaces) {
+        NSLog(@"              %@",fname);
+    }
+
+}
+```

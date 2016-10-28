@@ -1,0 +1,65 @@
+---
+title: 自学
+date: 2012-12-17 16:40
+post-link:
+---
+
+bq. 俗话说，无师自通。
+
+!/images/baozou/thinking.png!
+
+
+记一下我今天自学到的吧！（我基础知识不太好)
+
+声明OC "Objective C", textile "@"代码标记符号比较蛋疼,所以oc代码就不用@了
+
+1、OC里面继承父类，如果父类的某个属性不是public的，那么子类里也无法self. 到。
+
+2、NSArray如果要逆序排列（假设已经排列），可以
+
+	(for id obj in [array reverseObjectEnumerator])
+		[newMutableArray addObject:obj];
+
+3、假设有个数组，里面有各种东西，统计里面的每样东西的出现次数。（我的面试题 - -！，今天要自己写出来），思路还是和当时一样。把东西的值作为key，出现次数作为value放到一个字典里去。
+假设这个
+@nArray = ["abc", "ab", "cd", "abc", "cd", "abc", "dt"];@
+则返回一个:
+@{"abc" : 3, "ab" : 1 ....}@
+
+
+bc. __block NSMutableDictionary *resultDic = [{} mutableCopy];
+	[nArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		NSString *sKey = obj;
+		if(![[resultDic allkeys] containtsObject:sKey]){
+			NSMutableArray *newArray = [[] mutableCopy];
+			[newArray addObject:sKey];
+			[resultDic setObject:newArray forkey:sKey];
+		}else{
+			NSMutableArray *existArray = [resultDic objectForKey:sKey];
+			[existArray addObject:sKey];
+			[result Dic setObject:existArray forKey:sKey];
+		}
+		return resultDic;
+	}];
+
+
+4、我在想我现在block是不是用的太多了啊，delegate简单的也不用了，api里全是block，别人用起来是啥感受呢？
+
+5、Path的效果真好，豆瓣的也好，我要一个个模仿过去了。
+
+6、textile的code标记符号是：
+
+Blocks of code:
+bc.. puts "This style (notice the double dot) handles blank lines."
+puts "This is the second line of code."
+
+puts "This is the fourth."
+
+Or alternatively you can use this syntax for small blocks:
+bc. puts "This style (notice the single dot) stops at the first blank line."
+puts "This is the second line of code."
+
+This is not code.
+
+h1. 具体的例子：
+!/images/code_block_fix.png!

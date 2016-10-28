@@ -1,0 +1,35 @@
+---
+title: 计划赶不上变化
+date: 2012-12-19 15:59
+---
+
+!/images/baozou/surprise.png!
+
+天哪，我竟然有点看不懂自己前两天写的代码了。叫你TM不写注释！
+
+!/images/baozou/ganmao.jpg!
+
+我想写的，但是上头说，你TM都用git还写毛注释啊。我只是想说，对于我这种项目初而且单干的，merge很少的用户来说，注释还是要写滴，大不了以后去掉。让来维护我的人蛋疼一点而已。
+
+今天解决了挺多的问题的。
+!/images/baozou/baozou.jpg!
+
+把那个path的首页做出来了，把cell里尴尬的textlabel给干掉了。nice。
+
+前几天我还在写另外一个界面的代码，这说变就变令我很尴尬啊。不过没关系，至少我现在会path的首页了。
+1、它其实一个tbleview，上面一个cell放图片，下面一个放自定义的。
+2、自定义的如果也是一个tablview，就需要把在整个的（path首页vc）创建一个cell的实例（cell的类里面layoutsubviews全设好，把textlabel的frame设为CGRectZero），其他的该干嘛干嘛
+3、算两个array里不共有的东西。（比如说用里面东西的id来判断他们是否共有）
+	把count大的那个array的每样东西，设为{东西 : 东西id}的字典。然后再遍历小的array，如果里面东西的id（key = sb）和{beforeDic allkeys}里的相同，则beforeDic 删掉key为sb的东西。最后返回[beforeDic allValues] (这种方法是针对大array完全包含小array的东西)
+
+
+今天老板为我解答了一个基础问题，问别人基础问题，我真的很惭愧，这些大学里就应该搞清楚的东西。
+是这样的，有一个字典
+@{[1,2,3,4] : "A", [5,4,3] : @"B", [9,9,9] : "C", [0,1] : "d"....}@
+现在要对其进行按照每个key相对应的数组进行排列，假如说是升序则应该是返回这个字典 :
+@{[0,1] : "d", [9,9,9] : "C", @"B", [9,9,9], [1,2,3,4] : "A"....}@
+
+这里直接说老板的思路吧，创建一个map（就是一个类有key和count这两个属性，在这个类有一个返回NSCompareResult的方法，传递为参数为自己的实例）
+然后根据字典来初始化这个map 数组，用这个数组来用sortedArrayUsingSelector:@sel(刚我写的compare:)方法，排序完这个数组，在遍历这个型数组，遍历里objectforkey原始字典的数组，然后放到新的字典里就oK了。
+
+感觉自己效率真低。。。
