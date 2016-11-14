@@ -113,3 +113,34 @@ var obj2 = {
 // 提示： 这里的 __key1 有，但__value1 没有，那么不用删除 __key1
 // 最佳答案：一次循环就出结果了
 ```
+
+第三题：
+```js
+// 用异步的方式递归读出某个文件夹的里所有文件，结果放在一个数组里
+function readDirPromise(dir) {
+  return new Promise(resolve, reject) {
+    fs.readFile(dir, (err, files) => {
+      if (err) reject(err)
+      resolve(files)
+    })
+  }
+}
+
+function* readDir(dir) {
+  const files = yield readDirPromise(dir)
+  const res = []
+  for (var i = 0; i < files.length; i++) {
+    const subDir = files(i)
+    if (isDir(subDir)) {
+      res.push(yield readDir(subDir))
+    } else {
+      res.push(subDir)
+    }
+  }
+
+  return res
+}
+
+当然如果要更详细一点，这里应该加一些 try catch 来保证错误的捕获
+
+```
