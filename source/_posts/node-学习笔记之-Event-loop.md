@@ -4,9 +4,9 @@ date: 2017-04-09 17:46:22
 tags:
 ---
 
-每当聊起 Event loop 时，我们自然会想到，这不就是一个 ```while(true)``` 的事件循环嘛，当任务队列里有任务时就执行。
+每当聊起 Event loop 时，我们自然会想到，这不就是一个while(true)的事件循环嘛，当任务队列里有任务时就执行。
 
-那么这个```while(true)```的原理是什么呢？
+那么这个while(true)的原理是什么呢？
 
 ## 什么是 Event loop ?
 
@@ -173,7 +173,7 @@ setImmediate() 只能在 check 阶段执行回调。
 
 ## TLDR;
 
-- Event loop 是一种异步方式的实现，需要单线程的执行栈，运行环境异步 api，最后才是 ```while(true)``` 运行环境异步 api 维护的 taskQueue，这一整套体系才是 Event loop
+- Event loop 是一种异步方式的实现，需要单线程的执行栈，运行环境异步 api，最后才是 while(true) 运行环境异步 api 维护的 taskQueue，这一整套体系才是 Event loop
 - node 的 Event loop 的 taskQueue 分布在多个阶段中，这多个阶段按一个的顺序在执行。
 
 ## 参考
